@@ -14,6 +14,7 @@ ARG INSTALL_VCRUN
 ARG INSTALL_VBRUN
 ARG INSTALL_DOTNETFRAMEWORK
 ARG INSTALL_DOTNETCORE
+ARG INSTALL_DOTNETDUMMYAPP
 ARG INSTALL_WINDOWSPOWERSHELL
 ARG INSTALL_POWERSHELL
 ARG INSTALL_MSBUILDTOOLS
@@ -195,7 +196,11 @@ RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk
 
 RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh         "${DIRECTINSTALL}" ; fi
 
-RUN if [ "${INSTALL_DOTNETCORE}" = "yes" ] ; then if [ "${INSTALL_PYTHON3}" = "yes" ] ; then /helpers/wine-dotnet-dummyapp.sh ; fi ; fi
+################################################################################
+# dotnet-dummyapp
+################################################################################
+
+RUN if [ "${INSTALL_DOTNETDUMMYAPP}"    = "yes" ] ; then /helpers/wine-dotnet-dummyapp.sh                      ; fi
 
 ################################################################################
 # powershell 7.4
