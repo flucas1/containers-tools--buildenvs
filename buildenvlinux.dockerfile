@@ -170,6 +170,8 @@ ENV PATH="/opt/dotnet:$PATH"
 
 RUN /helpers/setup-dotnetdebugger.sh
 
+RUN /helpers/setup-dotnetextras.sh
+
 RUN python3 /helpers/dotnet-dummyapp.py
 
 ################################################################################
