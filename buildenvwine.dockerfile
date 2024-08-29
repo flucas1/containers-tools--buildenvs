@@ -15,6 +15,7 @@ ARG INSTALL_VBRUN
 ARG INSTALL_DOTNETFRAMEWORK
 ARG INSTALL_DOTNETCORE
 ARG INSTALL_DOTNETDUMMYAPP
+ARG INSTALL_DOTNETEXTRAS
 ARG INSTALL_WINDOWSPOWERSHELL
 ARG INSTALL_POWERSHELL
 ARG INSTALL_MSBUILDTOOLS
@@ -195,6 +196,12 @@ RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk
 #RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetasp.sh         "${DIRECTINSTALL}" ; fi
 
 RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh         "${DIRECTINSTALL}" ; fi
+
+################################################################################
+# dotnet-extras
+################################################################################
+
+RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then /helpers/wine-dotnet-extras.sh                        ; fi
 
 ################################################################################
 # dotnet-dummyapp
