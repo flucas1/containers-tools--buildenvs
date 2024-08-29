@@ -201,13 +201,13 @@ RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdeb
 # dotnet-extras
 ################################################################################
 
-RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then /helpers/wine-dotnetextras.sh                         ; fi
+RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then script -e -q -c /helpers/wine-dotnetextras.sh /dev/null ; fi
 
 ################################################################################
 # dotnet-dummyapp
 ################################################################################
 
-RUN if [ "${INSTALL_DOTNETDUMMYAPP}"    = "yes" ] ; then /helpers/wine-dotnet-dummyapp.sh                      ; fi
+RUN if [ "${INSTALL_DOTNETDUMMYAPP}"    = "yes" ] ; then script -e -q -c /helpers/wine-dotnet-dummyapp.sh /dev/null ; fi
 
 ################################################################################
 # powershell 7.4
