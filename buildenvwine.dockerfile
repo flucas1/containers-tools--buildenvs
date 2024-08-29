@@ -201,7 +201,7 @@ RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdeb
 # dotnet-extras
 ################################################################################
 
-RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then /helpers/wine-dotnet-extras.sh                        ; fi
+RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then /helpers/wine-dotnetextras.sh                         ; fi
 
 ################################################################################
 # dotnet-dummyapp
