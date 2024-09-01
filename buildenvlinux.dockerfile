@@ -77,7 +77,7 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh podman
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh skopeo
 
 RUN cp -f /usr/share/containers/storage.conf /etc/containers/storage.conf
-RUN sed -i -e 's|^#mount_program|mount_program|g' /etc/containers/storage.conf
+#RUN sed -i -e 's|^#mount_program|mount_program|g' /etc/containers/storage.conf
 RUN sed -i -e 's|^driver = ""|driver = "overlay"|g' /etc/containers/storage.conf
 
 ################################################################################
