@@ -180,7 +180,7 @@ RUN rm -R -f /home/wineuser/.cache/winetricks/powershell10/
 RUN rm -R -f /home/wineuser/.cache/winetricks/powershell20/
 
 ################################################################################
-# Python3 on wine
+# python3 on wine
 ################################################################################
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./pythoncache/ /home/wineuser/.cache/pythoncache/
