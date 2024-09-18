@@ -113,7 +113,7 @@ RUN http_proxy="${APTCACHER}" /helpers/setup-verisign.sh
 
 RUN adduser wineuser --quiet --disabled-login --home /home/wineuser --gecos ,,,
 RUN mkdir -p /wineprefix
-RUN chown wineuser:wineuser /wineprefix
+RUN chown -R wineuser:wineuser /wineprefix
 WORKDIR /home/wineuser
 USER wineuser
 
