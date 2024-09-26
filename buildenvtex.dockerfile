@@ -88,7 +88,7 @@ RUN http_proxy="${APTCACHER}" /helpers/setup-tex.sh
 
 RUN http_proxy="${APTCACHER}" /helpers/setup-java.sh
 
-RUN http_proxy="${APTCACHER}" /helpers/pip-retry-install.sh --upgrade language-tool-python
+RUN http_proxy="${APTCACHER}" /helpers/pip-retry-install.sh language-tool-python
 ENV LTP_PATH /opt/ltp
 RUN mkdir -p /opt/ltp
 RUN python3 -c "import language_tool_python; tool=language_tool_python.LanguageTool('en'); tool.close()"
