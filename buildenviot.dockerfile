@@ -63,6 +63,13 @@ RUN http_proxy="${APTCACHER}" /helpers/setup-mc.sh
 RUN http_proxy="${APTCACHER}" /helpers/setup-sysbench.sh
 
 ################################################################################
+# python3
+################################################################################
+
+RUN http_proxy="${APTCACHER}" /helpers/setup-python3.sh
+RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh python3-venv
+
+################################################################################
 # ESP32
 ################################################################################
 
@@ -73,9 +80,6 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh wget
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh flex
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh bison
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh gperf
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh python3
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh python3-pip
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh python3-venv
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh cmake
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh ninja-build
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh ccache
@@ -84,9 +88,9 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh libssl-dev
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh dfu-util
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh libusb-1.0-0
 
-#mkdir -p /esp
-#git -C /esp clone --recursive https://github.com/espressif/esp-idf.git
-#/esp/esp-idf/install.sh esp32
+#RUN mkdir -p /esp
+#RUN git -C /esp clone --recursive https://github.com/espressif/esp-idf.git
+#RUN /esp/esp-idf/install.sh esp32
 
 ################################################################################
 # install platformio
@@ -94,7 +98,9 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh libusb-1.0-0
 
 #https://github.com/tasmota/docker-tasmota
 
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh platformio
+RUN ${HELPERSPATH}/pip-retry-install.sh platformio
+
+RUN pio --version
 
 ################################################################################
 # install arduino
