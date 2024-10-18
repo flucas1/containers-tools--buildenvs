@@ -98,7 +98,7 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh libusb-1.0-0
 
 #https://github.com/tasmota/docker-tasmota
 
-RUN ${HELPERSPATH}/pip-retry-install.sh platformio
+RUN /helpers/pip-retry-install.sh platformio
 
 RUN pio --version
 
