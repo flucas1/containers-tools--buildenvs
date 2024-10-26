@@ -1,0 +1,31 @@
+name: Weekly Docker Build and Push
+
+on:
+  schedule:
+    # Run at 08:08 AM every Monday (you can adjust the time/day as needed)
+    - cron: '8 8 * * MON'
+  workflow_dispatch: # allows manual triggering of the workflow
+
+jobs:
+  build-and-push:
+    runs-on: debian-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2: Log in to the Docker registry (e.g., Docker Hub)
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Step 3: Build the Docker image
+      - name: Build Docker image
+        run: docker build -t yourusername/yourimagename:latest .
+
+      # Step 4: Push the Docker image to the registry
+      - name: Push Docker image
+        run: docker push yourusername/yourimagename:latest
