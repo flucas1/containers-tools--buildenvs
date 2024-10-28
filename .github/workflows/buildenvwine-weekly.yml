@@ -11,10 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up Bootstrap Environment
-        run: |
-          echo -e 'FROM debian:testing\nRUN bootstrap.sh\n"' | docker build -t bootstrap-image -
-    
       - name: Checkout Repository buildenvs
         uses: actions/checkout@v4
         with:
@@ -27,19 +23,17 @@ jobs:
           repository: flucas1/containers-tools--helpers
           path: containers-tools/helpers
 
+      - name: Set up Bootstrap Environment
+        run: |
+          echo -e 'FROM debian:testing\nRUN --mount=type=bind,source=${GITHUB_WORKSPACE}/containers-tools/buildenvs/bootstrap.sh,target=/data/bootstrap.sh sh /data/bootstrap.sh\n"' | DOCKER_BUILDKIT=1 docker build -t bootstrap-image -
+
       - name: Build Container image
         run: |
-          docker run --privileged --rm -v "${GITHUB_WORKSPACE}:/workspace" bootstrap-image \
+          docker run --privileged --rm -v "${GITHUB_WORKSPACE}:/data" bootstrap-image \
           sh -c "
-            cd /workspace &&
-            buildah bud -t myapp:latest .
+            cd /data &&
+            buildah bud -f /data/containers-tools/buildenvs/buildenvwine.sh -t buildenvwine:latest . &&
+            buildah login -u vaspian -p TOKEN docker.io &&
+            buildah tag buildenvwine:latest docker.io/vaspian/buildenvwine:latest &&
+            buildah push docker.io/vaspian/buildenvwine:latest
           "
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Push Container image
-        run: docker push yourusername/yourimagename:latest
