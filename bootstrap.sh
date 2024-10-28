@@ -7,7 +7,7 @@ http_proxy=${APTCACHER} DEBIAN_FRONTEND=noninteractive apt-get update
 http_proxy=${APTCACHER} DEBIAN_FRONTEND=noninteractive apt-get install tzdata ca-certificates jq sysbench git rsync --no-install-recommends -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold"
 sysbench cpu run
 sysbench memory run
-http_proxy=${APTCACHER} DEBIAN_FRONTEND=noninteractive apt-get install uidmap containers-storage fuse-overlayfs netavark aardvark-dns buildah podman skopeo --no-install-recommends -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold"
+http_proxy=${APTCACHER} DEBIAN_FRONTEND=noninteractive apt-get install uidmap containers-storage fuse-overlayfs iptables netavark aardvark-dns buildah podman skopeo --no-install-recommends -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold"
 cp -f /usr/share/containers/storage.conf /etc/containers/storage.conf
 #sed -i -e 's|^#mount_program|mount_program|g' /etc/containers/storage.conf
 sed -i -e 's|^driver = ""|driver = "overlay"|g' /etc/containers/storage.conf
