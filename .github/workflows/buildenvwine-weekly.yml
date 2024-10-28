@@ -14,14 +14,13 @@ jobs:
       - name: Checkout Repository buildenvs
         uses: actions/checkout@v4
         with:
-          repository: flucas1/containers-tools--buildenvs
-          path: ../../containers-tools/buildenvs
+          path: containers-tools/buildenvs
 
       - name: Checkout Repository helpers
         uses: actions/checkout@v4
         with:
           repository: flucas1/containers-tools--helpers
-          path: ../../containers-tools/helpers
+          path: containers-tools/helpers
 
       - name: Validating situation
         run: sh -c "pwd && ls -lA"
