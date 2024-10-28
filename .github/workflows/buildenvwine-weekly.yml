@@ -36,7 +36,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         run: |
-          docker run --privileged --rm -v "${GITHUB_WORKSPACE}:/data" bootstrap-image \
+          docker run --privileged --device /dev/fuse --rm -v "${GITHUB_WORKSPACE}:/data" bootstrap-image \
           env -i DOCKER_USERNAME="$DOCKER_USERNAME" DOCKER_TOKEN="$DOCKER_TOKEN" sh -c "
             uname -a &&
             cd /data &&
@@ -58,7 +58,7 @@ jobs:
             mkdir -p /data/containers-tools/winetricks/powershell20 &&
             mkdir -p /data/containers-tools/pythoncache &&
             buildah bud \
-              --storage-driver overlay2 --pull --layers=false --isolation=chroot --network=host --pid=host --security-opt label=disable \
+              --storage-driver overlay --pull --layers=false --isolation=chroot --network=host --pid=host --security-opt label=disable \
               --file /data/containers-tools/buildenvs/buildenvwine.dockerfile --tag buildenvwine:latest --build-context containers-tools=./containers-tools \
               --build-arg APTCACHER= \
               --build-arg WINEGRAPE=devel \
