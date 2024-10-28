@@ -28,7 +28,7 @@ jobs:
 
       - name: Set up Bootstrap Environment
         run: |
-          echo -e 'FROM debian:testing\nRUN --mount=type=bind,source=containers-tools/buildenvs,target=/data sh -c "set -x && ls -lA /data && /data/bootstrap.sh"' > bootstrap.dockerfile \
+          echo -e 'FROM debian:testing\nRUN --mount=type=bind,source=containers-tools/buildenvs,target=/data sh -c "set -x && ls -lA /data && /data/bootstrap.sh"' > bootstrap.dockerfile && \
           DOCKER_BUILDKIT=1 docker build -t bootstrap-image -f bootstrap.dockerfile .
 
       - name: Build Container image
