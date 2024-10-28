@@ -38,6 +38,8 @@ jobs:
             cd /data &&
             mkdir -p /data/containers-tools/helperscache &&
             mkdir -p /data/containers-tools/mscorefonts &&
+            mkdir -p /data/containers-tools/winecache/gecko &&
+            mkdir -p /data/containers-tools/winecache/mono &&
             buildah bud --file /data/containers-tools/buildenvs/buildenvwine.dockerfile --tag buildenvwine:latest --storage-driver overlay --build-context containers-tools=./containers-tools --build-arg APTCACHER= --build-arg WINEGRAPE=devel --build-arg WINEVERSION= --build-arg DEBIANBASE=testing --build-arg CUSTOMREPOSITORY_IDENTIFIER= --build-arg CUSTOMREPOSITORY_SERVER= --build-arg CUSTOMREPOSITORY_PATH=/repository/ --build-arg DIRECTINSTALL=yes --build-arg INSTALL_MSCOREFONTS= --build-arg INSTALL_PIP= --build-arg INSTALL_MSBUILDTOOLS= --build-arg INSTALL_VBRUN= --build-arg INSTALL_DOTNETCORE=yes --build-arg INSTALL_DOTNETFRAMEWORK= --build-arg INSTALL_POWERSHELL=yes --build-arg INSTALL_MSYS2= --build-arg INSTALL_DOTNETEXTRAS=yes --build-arg INSTALL_VCRUN= --build-arg INSTALL_PYTHON3=yes --build-arg INSTALL_DOTNETDUMMYAPP=yes --build-arg INSTALL_WINDOWSPOWERSHELL= . &&
             buildah login -u vaspian -p TOKEN docker.io &&
             buildah tag buildenvwine:latest docker.io/vaspian/buildenvwine:latest &&
