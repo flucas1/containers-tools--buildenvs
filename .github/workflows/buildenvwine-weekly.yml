@@ -36,7 +36,7 @@ jobs:
           docker run --privileged --rm -v "${GITHUB_WORKSPACE}:/data" bootstrap-image \
           sh -c "
             cd /data &&
-            buildah bud -f /data/containers-tools/buildenvs/buildenvwine.sh -t buildenvwine:latest . &&
+            buildah bud -f /data/containers-tools/buildenvs/buildenvwine.dockerfile -t buildenvwine:latest . &&
             buildah login -u vaspian -p TOKEN docker.io &&
             buildah tag buildenvwine:latest docker.io/vaspian/buildenvwine:latest &&
             buildah push docker.io/vaspian/buildenvwine:latest
