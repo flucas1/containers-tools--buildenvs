@@ -57,6 +57,7 @@ jobs:
             mkdir -p /data/containers-tools/winetricks/powershell20 &&
             mkdir -p /data/containers-tools/pythoncache &&
             buildah bud \
+              --storage-driver overlay2 --pull --layers=false --isolation=chroot --network=host --pid=host --security-opt label=disable \
               --file /data/containers-tools/buildenvs/buildenvwine.dockerfile --tag buildenvwine:latest --build-context containers-tools=./containers-tools \
               --build-arg APTCACHER= \
               --build-arg WINEGRAPE=devel \
