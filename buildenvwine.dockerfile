@@ -82,7 +82,7 @@ ENV LC_ALL en_US.UTF-8
 RUN http_proxy="${APTCACHER}" /helpers/setup-fonts-base.sh
 RUN mkdir -p /root/mscorefonts
 COPY --from=containers-tools ./mscorefonts/ /root/mscorefonts
-RUN http_proxy="${APTCACHER}" /helpers/setup-fonts-microsoft.sh
+RUN if [ "${INSTALL_MSCOREFONTS}"       = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/setup-fonts-microsoft.sh ; fi
 RUN rm -R -f /root/mscorefonts
 
 ################################################################################
