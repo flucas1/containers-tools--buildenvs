@@ -12,10 +12,9 @@ jobs:
 
     steps:
       - name: Preparations
-        uses: actions/checkout@v4
         run: |
           uname -a && \
-          df -h &&
+          df -h
 
       - name: Checkout repository buildenvs
         uses: actions/checkout@v4
@@ -37,7 +36,7 @@ jobs:
           df -h && \
           echo -e 'FROM debian:testing\nRUN --mount=type=bind,source=containers-tools/buildenvs,target=/data sh -c "set -x && ls -lA /data && sh /data/bootstrap.sh"' > bootstrap.dockerfile && \
           DOCKER_BUILDKIT=1 docker build --tag bootstrap-image --file bootstrap.dockerfile . && \
-          df -h &&
+          df -h
 
       - name: Build and publish container image
         env:
