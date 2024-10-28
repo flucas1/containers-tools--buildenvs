@@ -36,7 +36,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         run: |
-          docker run --privileged --device /dev/fuse --rm -v "${GITHUB_WORKSPACE}:/data" bootstrap-image \
+          docker run --privileged --rm -v "${GITHUB_WORKSPACE}:/data" bootstrap-image \
           env -i DOCKER_USERNAME="$DOCKER_USERNAME" DOCKER_TOKEN="$DOCKER_TOKEN" sh -c "
             uname -a &&
             cd /data &&
