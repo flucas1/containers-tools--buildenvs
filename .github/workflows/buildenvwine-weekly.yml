@@ -38,6 +38,7 @@ jobs:
         run: |
           docker run --privileged --rm -v "${GITHUB_WORKSPACE}:/data" bootstrap-image \
           env -i DOCKER_USERNAME="$DOCKER_USERNAME" DOCKER_TOKEN="$DOCKER_TOKEN" sh -c "
+            uname -a &&
             cd /data &&
             mkdir -p /data/containers-tools/helperscache &&
             mkdir -p /data/containers-tools/mscorefonts &&
