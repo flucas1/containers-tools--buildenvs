@@ -24,11 +24,11 @@ jobs:
           path: containers-tools/helpers
 
       - name: Validating situation
-        run: sh -c "pwd && ls -lA && ls -lA containers-tools && ls -lA containers-tools/buildenvs && ls -lA containers-tools/helpers"
+        run: sh -c "set -x && pwd && ls -lA && ls -lA containers-tools && ls -lA containers-tools/buildenvs && ls -lA containers-tools/helpers"
 
       - name: Set up Bootstrap Environment
         run: |
-          echo -e 'FROM debian:testing\nRUN --mount=type=bind,source=${GITHUB_WORKSPACE}/containers-tools/buildenvs/bootstrap.sh,target=/data/bootstrap.sh sh /data/bootstrap.sh' | DOCKER_BUILDKIT=1 docker build -t bootstrap-image -
+          echo -e 'FROM debian:testing\nRUN --mount=type=bind,source=containers-tools/buildenvs/bootstrap.sh,target=/data/bootstrap.sh sh /data/bootstrap.sh' | DOCKER_BUILDKIT=1 docker build -t bootstrap-image -
 
       - name: Build Container image
         run: |
