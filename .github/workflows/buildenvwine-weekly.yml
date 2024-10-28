@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository buildenvs
+      - name: Checkout repository buildenvs
         uses: actions/checkout@v4
         with:
           repository: flucas1/containers-tools--buildenvs
           path: containers-tools/buildenvs
 
-      - name: Checkout Repository helpers
+      - name: Checkout repository helpers
         uses: actions/checkout@v4
         with:
           repository: flucas1/containers-tools--helpers
@@ -26,12 +26,12 @@ jobs:
       - name: Validating situation
         run: sh -c "set -x && pwd && ls -lA && ls -lA containers-tools && ls -lA containers-tools/buildenvs && ls -lA containers-tools/helpers"
 
-      - name: Set up Bootstrap Environment
+      - name: Set up bootstrap environment
         run: |
           echo -e 'FROM debian:testing\nRUN --mount=type=bind,source=containers-tools/buildenvs,target=/data sh -c "set -x && ls -lA /data && sh /data/bootstrap.sh"' > bootstrap.dockerfile && \
           DOCKER_BUILDKIT=1 docker build -t bootstrap-image -f bootstrap.dockerfile .
 
-      - name: Build Container image
+      - name: Build and publish container image
         run: |
           docker run --privileged --rm -v "${GITHUB_WORKSPACE}:/data" bootstrap-image \
           sh -c "
