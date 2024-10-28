@@ -34,14 +34,17 @@ jobs:
 
       - name: Set up bootstrap environment
         run: |
+          df -h && \
           echo -e 'FROM debian:testing\nRUN --mount=type=bind,source=containers-tools/buildenvs,target=/data sh -c "set -x && ls -lA /data && sh /data/bootstrap.sh"' > bootstrap.dockerfile && \
-          DOCKER_BUILDKIT=1 docker build --tag bootstrap-image --file bootstrap.dockerfile .
+          DOCKER_BUILDKIT=1 docker build --tag bootstrap-image --file bootstrap.dockerfile . && \
+          df -h &&
 
       - name: Build and publish container image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         run: |
+          df -h && \
           docker run --privileged --rm -v "${GITHUB_WORKSPACE}:/data" bootstrap-image \
           env -i DOCKER_USERNAME="$DOCKER_USERNAME" DOCKER_TOKEN="$DOCKER_TOKEN" sh -c "
             cd /data &&
@@ -92,4 +95,5 @@ jobs:
             echo "${DOCKER_TOKEN}" | buildah login --username "${DOCKER_USERNAME}" --password-stdin docker.io &&
             buildah tag buildenvwine:latest docker.io/vaspian/buildenvwine:latest &&
             buildah push docker.io/vaspian/buildenvwine:latest
-          "
+          " && \
+          df -h
