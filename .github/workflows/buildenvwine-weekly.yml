@@ -14,6 +14,7 @@ jobs:
       - name: Checkout Repository buildenvs
         uses: actions/checkout@v4
         with:
+          repository: flucas1/containers-tools--buildenvs
           path: containers-tools/buildenvs
 
       - name: Checkout Repository helpers
@@ -23,7 +24,7 @@ jobs:
           path: containers-tools/helpers
 
       - name: Validating situation
-        run: sh -c "pwd && ls -lA"
+        run: sh -c "pwd && ls -lA && ls -lA containers-tools && ls -lA containers-tools/buildenvs && ls -lA containers-tools/helpers"
 
       - name: Set up Bootstrap Environment
         run: |
