@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up Bootstrap Environment
+        run: |
+          echo -e 'FROM debian:testing\nRUN bootstrap.sh\n"' | docker build -t bootstrap-image -
+    
       - name: Checkout Repository buildenvs
         uses: actions/checkout@v4
         with:
@@ -24,7 +28,12 @@ jobs:
           path: containers-tools/helpers
 
       - name: Build Container image
-        run: docker build -t yourusername/yourimagename:latest ./buildenvs/buildenvwine.dockerfile
+        run: |
+          docker run --privileged --rm -v "${GITHUB_WORKSPACE}:/workspace" bootstrap-image \
+          sh -c "
+            cd /workspace &&
+            buildah bud -t myapp:latest .
+          "
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
