@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Preparations
+        uses: actions/checkout@v4
+        run: |
+          uname -a && \
+          df -h &&
+
       - name: Checkout repository buildenvs
         uses: actions/checkout@v4
         with:
@@ -38,7 +44,6 @@ jobs:
         run: |
           docker run --privileged --rm -v "${GITHUB_WORKSPACE}:/data" bootstrap-image \
           env -i DOCKER_USERNAME="$DOCKER_USERNAME" DOCKER_TOKEN="$DOCKER_TOKEN" sh -c "
-            uname -a &&
             cd /data &&
             mkdir -p /data/containers-tools/helperscache &&
             mkdir -p /data/containers-tools/mscorefonts &&
@@ -57,6 +62,7 @@ jobs:
             mkdir -p /data/containers-tools/winetricks/powershell10 &&
             mkdir -p /data/containers-tools/winetricks/powershell20 &&
             mkdir -p /data/containers-tools/pythoncache &&
+            df -h &&
             buildah bud \
               --storage-driver vfs --pull --layers=false --isolation=chroot --network=host --pid=host --security-opt label=disable \
               --file /data/containers-tools/buildenvs/buildenvwine.dockerfile --tag buildenvwine:latest --build-context containers-tools=./containers-tools \
@@ -82,6 +88,7 @@ jobs:
               --build-arg INSTALL_DOTNETDUMMYAPP=yes \
               --build-arg INSTALL_WINDOWSPOWERSHELL= \
               . &&
+            df -h &&
             echo "${DOCKER_TOKEN}" | buildah login --username "${DOCKER_USERNAME}" --password-stdin docker.io &&
             buildah tag buildenvwine:latest docker.io/vaspian/buildenvwine:latest &&
             buildah push docker.io/vaspian/buildenvwine:latest
