@@ -105,6 +105,15 @@ RUN http_proxy="${APTCACHER}" /helpers/setup-python3.sh
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh perl
 
 ################################################################################
+# php
+################################################################################
+
+RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh php
+RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh php-cli
+RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh php-mbstring
+RUN http_proxy="${APTCACHER}" /helpers/setup-phpcomposer.sh
+
+################################################################################
 # documentation
 ################################################################################
 
