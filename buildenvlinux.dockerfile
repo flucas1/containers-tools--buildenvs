@@ -114,6 +114,12 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh php-mbstring
 RUN http_proxy="${APTCACHER}" /helpers/setup-phpcomposer.sh
 
 ################################################################################
+# pdf
+################################################################################
+
+RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh poppler-utils
+
+################################################################################
 # documentation
 ################################################################################
 
