@@ -106,7 +106,7 @@ RUN pio --version
 # install arduino
 ################################################################################
 
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh arduino
+RUN /helpers/setup-arduino.sh
 
 ################################################################################
 # install cleanup
