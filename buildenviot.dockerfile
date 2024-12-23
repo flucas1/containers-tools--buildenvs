@@ -96,11 +96,7 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh libusb-1.0-0
 # install platformio
 ################################################################################
 
-#https://github.com/tasmota/docker-tasmota
-
-RUN /helpers/pip-retry-install.sh platformio
-
-RUN pio --version
+RUN /helpers/setup-platformio.sh
 
 ################################################################################
 # install arduino
