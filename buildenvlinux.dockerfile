@@ -147,6 +147,7 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh build-essential
 ################################################################################
 
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh yamllint
+RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh yq
 
 RUN wget --no-verbose --retry-connrefused --waitretry=1 --tries=10 https://baltocdn.com/helm/signing.asc -O /etc/apt/keyrings/helm.asc
 RUN printf "deb [signed-by=/etc/apt/keyrings/helm.asc] https://baltocdn.com/helm/stable/debian/ all main" > /etc/apt/sources.list.d/helm.list
