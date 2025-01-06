@@ -164,7 +164,11 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh helm
 # keycloak
 ################################################################################
 
-RUN /helpers/pip-retry-install.sh python-keycloak
+RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh nodejs
+RUN node -v
+RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh npm
+RUN npm -v
+RUN npm install keycloak-admin
 
 ################################################################################
 # .NET
