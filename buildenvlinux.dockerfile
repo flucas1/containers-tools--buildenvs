@@ -168,7 +168,6 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh nodejs
 RUN node -v
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh npm
 RUN npm -v
-RUN npm install -g keycloak-admin
 
 ################################################################################
 # .NET
