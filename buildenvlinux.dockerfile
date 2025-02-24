@@ -156,7 +156,7 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh yamllint
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh yq
 
 RUN wget --no-verbose --retry-connrefused --waitretry=1 --tries=10 https://baltocdn.com/helm/signing.asc -O /etc/apt/keyrings/helm.asc
-RUN printf "deb [signed-by=/etc/apt/keyrings/helm.asc] https://baltocdn.com/helm/stable/debian/ all main" > /etc/apt/sources.list.d/helm.list
+RUN printf "Types: deb\nURIs: https://baltocdn.com/helm/stable/debian/\nSuites: all\nComponents: main\nSigned-By: /etc/apt/keyrings/helm.asc\n" > /etc/apt/sources.list.d/helm.sources
 RUN http_proxy="${APTCACHER}" /helpers/apt-update.sh
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh helm
 
@@ -178,7 +178,7 @@ ENV DOTNET_NOLOGO 1
 ENV NO_COLOR 1
 
 # RUN wget --no-verbose --retry-connrefused --waitretry=1 --tries=10 https://packages.microsoft.com/keys/microsoft.asc -O /etc/apt/keyrings/netcore.asc
-# RUN printf "deb [signed-by=/etc/apt/keyrings/netcore.asc] https://packages.microsoft.com/debian/12/prod $(lsb_release -c | awk '{print $2}') main" > /etc/apt/sources.list.d/netcore.list
+# RUN printf "Types: deb\nURIs: https://packages.microsoft.com/debian/12/prod\nSuites: $(lsb_release -c | awk '{print $2}')\nComponents: main\nSigned-By: /etc/apt/keyrings/netcore.asc\n" > /etc/apt/sources.list.d/netcore.sources
 # RUN http_proxy="${APTCACHER}" /helpers/apt-update.sh
 # RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh dotnet-sdk-6.0 dotnet-sdk-8.0
 
