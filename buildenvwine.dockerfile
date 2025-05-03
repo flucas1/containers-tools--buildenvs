@@ -197,7 +197,9 @@ RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk
 #RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetruntime.sh     "${DIRECTINSTALL}" ; fi
 #RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetasp.sh         "${DIRECTINSTALL}" ; fi
 
-RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh         "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh         "${DIRECTINSTALL}" preview  ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh         "${DIRECTINSTALL}" newest   ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh         "${DIRECTINSTALL}" previous ; fi
 
 ################################################################################
 # dotnet-extras
