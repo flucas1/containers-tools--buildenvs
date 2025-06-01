@@ -208,6 +208,8 @@ RUN /helpers/setup-dotnetextras.sh
 
 RUN python3 /helpers/dotnet-dummyapp.py
 
+RUN /helpers/setup-emscripten.sh
+
 ################################################################################
 # install cleanup
 ################################################################################
