@@ -57,7 +57,7 @@ ENV TZ=UTC
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN http_proxy="${APTCACHER}" /helpers/apt-tuning.sh
+RUN http_proxy="${APTCACHER}" /helpers/apt-tuning.sh ${DEBIANBASE}
 RUN http_proxy="${APTCACHER}" /helpers/apt-upgrade.sh
 
 ################################################################################
