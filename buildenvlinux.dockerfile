@@ -173,8 +173,8 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh helm
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh nodejs
 RUN node -v
 
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh gyp
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh libnode-dev
+RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh gyp
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh node-gyp
 
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh npm
