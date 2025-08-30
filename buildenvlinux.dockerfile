@@ -170,15 +170,7 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh helm
 # keycloak
 ################################################################################
 
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh nodejs
-RUN node -v
-
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh libnode-dev
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh gyp
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh node-gyp
-
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh npm
-RUN npm -v
+RUN http_proxy="${APTCACHER}" /helpers/setup-npm.sh
 
 ################################################################################
 # .NET
