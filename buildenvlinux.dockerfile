@@ -162,8 +162,8 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh build-essential
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh yamllint
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh yq
 
-RUN wget --no-verbose --retry-connrefused --waitretry=1 --tries=10 https://baltocdn.com/helm/signing.asc -O /etc/apt/keyrings/helm.asc
-RUN printf "Types: deb\nURIs: https://baltocdn.com/helm/stable/debian/\nSuites: all\nComponents: main\nSigned-By: /etc/apt/keyrings/helm.asc\n" > /etc/apt/sources.list.d/helm.sources
+RUN wget --no-verbose --retry-connrefused --waitretry=1 --tries=10 https://packages.buildkite.com/helm-linux/helm-debian/gpgkey -O /etc/apt/keyrings/helm.asc
+RUN printf "Types: deb\nURIs: https://packages.buildkite.com/helm-linux/helm-debian/any/\nSuites: any\nComponents: main\nSigned-By: /etc/apt/keyrings/helm.asc\n" > /etc/apt/sources.list.d/helm.sources
 RUN http_proxy="${APTCACHER}" /helpers/apt-update.sh
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh helm
 
