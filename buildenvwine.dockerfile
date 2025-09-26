@@ -10,6 +10,7 @@ ARG DEBIANBASE
 ARG APTCACHER
 ARG WINEGRAPE
 ARG WINEVERSION
+ARG MULTIARCH
 ARG DIRECTINSTALL
 ARG INSTALL_MSCOREFONTS
 ARG INSTALL_VCRUN
@@ -105,7 +106,7 @@ RUN http_proxy="${APTCACHER}" /helpers/setup-x.sh
 
 COPY --from=containers-tools ./winecache/gecko/ /usr/share/wine/gecko/
 COPY --from=containers-tools ./winecache/mono/ /usr/share/wine/mono/
-RUN http_proxy="${APTCACHER}" /helpers/setup-wine.sh "${WINEGRAPE}" "${WINEVERSION}"
+RUN http_proxy="${APTCACHER}" /helpers/setup-wine.sh "${WINEGRAPE}" "${WINEVERSION}" "${MULTIARCH}"
 
 RUN http_proxy="${APTCACHER}" /helpers/setup-verisign.sh
 
