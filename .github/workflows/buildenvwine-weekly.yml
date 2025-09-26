@@ -77,6 +77,7 @@ jobs:
               --build-arg APTCACHER= \
               --build-arg WINEGRAPE=devel \
               --build-arg WINEVERSION= \
+              --build-arg MULTIARCH=no \
               --build-arg DEBIANBASE=testing \
               --build-arg CUSTOMREPOSITORY_IDENTIFIER= \
               --build-arg CUSTOMREPOSITORY_SERVER= \
