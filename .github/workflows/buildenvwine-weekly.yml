@@ -26,12 +26,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: flucas1/containers-tools--buildenvs
+          ref: main
           path: containers-tools/buildenvs
 
       - name: Checkout repository helpers
         uses: actions/checkout@v4
         with:
           repository: flucas1/containers-tools--helpers
+          ref: main
           path: containers-tools/helpers
 
       - name: Validating situation
