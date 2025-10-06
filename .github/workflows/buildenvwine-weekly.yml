@@ -22,12 +22,16 @@ jobs:
           docker system df &&\
           df -h
 
+      - name: Clean containers-tools folder
+        run: rm -rf containers-tools
+
       - name: Checkout repository buildenvs
         uses: actions/checkout@v4
         with:
           repository: flucas1/containers-tools--buildenvs
           ref: main
           path: containers-tools/buildenvs
+          clean: true
 
       - name: Checkout repository helpers
         uses: actions/checkout@v4
@@ -35,6 +39,7 @@ jobs:
           repository: flucas1/containers-tools--helpers
           ref: main
           path: containers-tools/helpers
+          clean: true
 
       - name: Validating situation
         run: sh -c "set -x && pwd && ls -lA && ls -lA containers-tools && ls -lA containers-tools/buildenvs && ls -lA containers-tools/helpers"
