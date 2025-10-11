@@ -162,7 +162,7 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh build-essential
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh yamllint
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh yq
 
-RUN wget --no-verbose --retry-connrefused --waitretry=1 --tries=10 https://packages.buildkite.com/helm-linux/helm-debian/gpgkey -O /etc/apt/keyrings/helm.asc
+RUN /helpers/wget-with-retries.sh https://packages.buildkite.com/helm-linux/helm-debian/gpgkey /etc/apt/keyrings/helm.asc
 RUN printf "Types: deb\nURIs: https://packages.buildkite.com/helm-linux/helm-debian/any/\nSuites: any\nComponents: main\nSigned-By: /etc/apt/keyrings/helm.asc\n" > /etc/apt/sources.list.d/helm.sources
 RUN http_proxy="${APTCACHER}" /helpers/apt-update.sh
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh helm
@@ -181,27 +181,27 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 ENV DOTNET_NOLOGO 1
 ENV NO_COLOR 1
 
-# RUN wget --no-verbose --retry-connrefused --waitretry=1 --tries=10 https://packages.microsoft.com/keys/microsoft.asc -O /etc/apt/keyrings/netcore.asc
+# RUN /helpers/wget-with-retries.sh https://packages.microsoft.com/keys/microsoft.asc /etc/apt/keyrings/netcore.asc
 # RUN printf "Types: deb\nURIs: https://packages.microsoft.com/debian/12/prod\nSuites: $(lsb_release -c | awk '{print $2}')\nComponents: main\nSigned-By: /etc/apt/keyrings/netcore.asc\n" > /etc/apt/sources.list.d/netcore.sources
 # RUN http_proxy="${APTCACHER}" /helpers/apt-update.sh
 # RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh dotnet-sdk-6.0 dotnet-sdk-8.0
 
-#RUN mkdir -p /opt/dotnet
-## RUN wget --quiet --no-verbose --retry-connrefused --waitretry=3 --tries=20 https://dot.net/v1/dotnet-install.sh -O - | bash /dev/stdin --channel 6.0 --install-dir /opt/dotnet --verbose
-## RUN wget --quiet --no-verbose --retry-connrefused --waitretry=3 --tries=20 https://dot.net/v1/dotnet-install.sh -O - | bash /dev/stdin --channel 7.0 --install-dir /opt/dotnet --verbose
-## RUN wget --quiet --no-verbose --retry-connrefused --waitretry=3 --tries=20 https://dot.net/v1/dotnet-install.sh -O - | bash /dev/stdin --channel 8.0 --install-dir /opt/dotnet --verbose
-#RUN wget --quiet --no-verbose --retry-connrefused --waitretry=3 --tries=20 https://dot.net/v1/dotnet-install.sh -O - | bash /dev/stdin --channel $(wget --quiet --no-verbose --retry-connrefused --waitretry=3 --tries=20 https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json -O - | jq -r '.["releases-index"][] | select(."support-phase"=="active") | ."channel-version"' | sort --version-sort --reverse | head -n 1) --install-dir /opt/dotnet --verbose
-#RUN mkdir -p /etc/dotnet
-#RUN echo "/opt/dotnet" > /etc/dotnet/install_location
+# RUN mkdir -p /opt/dotnet
+## RUN /helpers/wget-with-retries.sh https://dot.net/v1/dotnet-install.sh - | bash /dev/stdin --channel 6.0 --install-dir /opt/dotnet --verbose
+## RUN /helpers/wget-with-retries.sh https://dot.net/v1/dotnet-install.sh - | bash /dev/stdin --channel 7.0 --install-dir /opt/dotnet --verbose
+## RUN /helpers/wget-with-retries.sh https://dot.net/v1/dotnet-install.sh - | bash /dev/stdin --channel 8.0 --install-dir /opt/dotnet --verbose
+# RUN /helpers/wget-with-retries.sh https://dot.net/v1/dotnet-install.sh - | bash /dev/stdin --channel $(wget --quiet --no-verbose --retry-connrefused --waitretry=3 --tries=20 https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json -O - | jq -r '.["releases-index"][] | select(."support-phase"=="active") | ."channel-version"' | sort --version-sort --reverse | head -n 1) --install-dir /opt/dotnet --verbose
+# RUN mkdir -p /etc/dotnet
+# RUN echo "/opt/dotnet" > /etc/dotnet/install_location
 
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetdependencies.sh
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetlocation.sh
-#RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetrepository.sh
+# RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetrepository.sh
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh preview
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh newest
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh previous
-#RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetruntime.sh
-#RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetasp.sh
+# RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetruntime.sh
+# RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetasp.sh
 
 ENV PATH="/opt/dotnet:$PATH"
 # do not do ${PATH} -- this is envvar from computer, without {} it is from container

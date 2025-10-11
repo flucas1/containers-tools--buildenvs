@@ -94,7 +94,7 @@ ENV LTP_PATH /opt/ltp
 RUN mkdir -p /opt/ltp
 RUN python3 -c "import language_tool_python; tool=language_tool_python.LanguageTool('en'); tool.close()"
 
-# RUN wget --no-verbose https://www.languagetool.org/download/LanguageTool-stable.zip -O /opt/ltp/lpt-stable.zip
+# RUN /helpers/wget-with-retries.sh https://www.languagetool.org/download/LanguageTool-stable.zip /opt/ltp/lpt-stable.zip
 # RUN unzip /opt/ltp/lpt-stable.zip -d /opt/ltp
 # RUN rm -f /opt/ltp/lpt-stable.zip
 
