@@ -199,7 +199,7 @@ ENV NO_COLOR 1
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetdependencies.sh
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetlocation.sh
 # RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetrepository.sh
-RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh "${VERSION_DOTNETCORE_PREVIEW}"
+RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh "$( if [ ${VERSION_DOTNETCORE_PREVIEW} = '' ] ; then echo preview ; else echo ${VERSION_DOTNETCORE_PREVIEW} ; fi )"
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh newest
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh previous
 # RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetruntime.sh
