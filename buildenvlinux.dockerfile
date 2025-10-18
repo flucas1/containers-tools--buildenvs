@@ -13,6 +13,8 @@ ARG CUSTOMREPOSITORY_IDENTIFIER
 ARG CUSTOMREPOSITORY_SERVER
 ARG CUSTOMREPOSITORY_PATH
 
+ARG VERSION_DOTNETCORE_PREVIEW
+
 ################################################################################
 # settings
 ################################################################################
@@ -197,7 +199,7 @@ ENV NO_COLOR 1
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetdependencies.sh
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetlocation.sh
 # RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetrepository.sh
-RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh preview
+RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh "${VERSION_DOTNETCORE_PREVIEW}"
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh newest
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh previous
 # RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetruntime.sh
