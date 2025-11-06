@@ -183,6 +183,8 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 ENV DOTNET_NOLOGO 1
 ENV NO_COLOR 1
 
+RUN [ "${DOTNET_CLI_TELEMETRY_OPTOUT}" = "1" ]
+
 # RUN /helpers/wget-with-retries.sh https://packages.microsoft.com/keys/microsoft.asc /etc/apt/keyrings/netcore.asc
 # RUN printf "Types: deb\nURIs: https://packages.microsoft.com/debian/12/prod\nSuites: $(lsb_release -c | awk '{print $2}')\nComponents: main\nSigned-By: /etc/apt/keyrings/netcore.asc\n" > /etc/apt/sources.list.d/netcore.sources
 # RUN http_proxy="${APTCACHER}" /helpers/apt-update.sh
