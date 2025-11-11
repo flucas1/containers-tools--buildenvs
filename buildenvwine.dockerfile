@@ -197,9 +197,9 @@ RUN rm -R -f /home/wineuser/.cache/pythoncache/
 
 RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" preview  ; fi
 RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" newest   ; fi
-RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" previous ; fi
-#RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetruntime.sh     "${DIRECTINSTALL}" ; fi
-#RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetasp.sh         "${DIRECTINSTALL}" ; fi
+# RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" previous ; fi
+# RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetruntime.sh     "${DIRECTINSTALL}" ; fi
+# RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetasp.sh         "${DIRECTINSTALL}" ; fi
 
 RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh         "${DIRECTINSTALL}" ; fi
 
