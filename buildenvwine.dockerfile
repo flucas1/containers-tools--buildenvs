@@ -222,6 +222,12 @@ RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then script -e -q -c /helper
 RUN if [ "${INSTALL_DOTNETDUMMYAPP}"    = "yes" ] ; then script -e -q -c /helpers/wine-dotnet-dummyapp.sh /dev/null ; fi
 
 ################################################################################
+# wix
+################################################################################
+
+RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then script -e -q -c /helpers/wine-wix.sh /dev/null ; fi
+
+################################################################################
 # powershell 7.4
 ################################################################################
 
