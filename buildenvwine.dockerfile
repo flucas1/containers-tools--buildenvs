@@ -31,6 +31,8 @@ ARG CUSTOMREPOSITORY_IDENTIFIER
 ARG CUSTOMREPOSITORY_SERVER
 ARG CUSTOMREPOSITORY_PATH
 
+ARG VERSION_DOTNETCORE_PREVIEW
+
 ################################################################################
 # settings
 ################################################################################
@@ -201,8 +203,8 @@ RUN rm -R -f /home/wineuser/.cache/pythoncache/
 # .NET CORE SDK
 ################################################################################
 
-RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" preview  ; fi
-RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" newest   ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" "$( if [ "${VERSION_DOTNETCORE_PREVIEW}" = "" ] ; then echo preview ; else echo "${VERSION_DOTNETCORE_PREVIEW}" ; fi )" ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" newest ; fi
 # RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" previous ; fi
 # RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetruntime.sh     "${DIRECTINSTALL}" ; fi
 # RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetasp.sh         "${DIRECTINSTALL}" ; fi
