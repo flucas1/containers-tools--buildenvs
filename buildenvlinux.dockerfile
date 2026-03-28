@@ -225,6 +225,15 @@ RUN python3 /helpers/dotnet-dummyapp.py
 RUN /helpers/setup-emscripten.sh
 
 ################################################################################
+# Android Studio
+################################################################################
+
+RUN http_proxy="${APTCACHER}" /helpers/setup-java.sh
+
+RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh android-sdk
+RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh android-sdk-helper
+
+################################################################################
 # install cleanup
 ################################################################################
 
