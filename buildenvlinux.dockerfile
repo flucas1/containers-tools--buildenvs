@@ -213,7 +213,7 @@ RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh newest
 # RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetruntime.sh
 # RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetasp.sh
 
-ENV PATH="/opt/dotnet:$PATH"
+ENV PATH="$PATH:/opt/dotnet"
 # do not do ${PATH} -- this is envvar from computer, without {} it is from container
 
 RUN /helpers/setup-dotnetdebugger.sh
@@ -230,8 +230,11 @@ RUN /helpers/setup-emscripten.sh
 
 RUN http_proxy="${APTCACHER}" /helpers/setup-java.sh
 
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh android-sdk
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh android-sdk-helper
+RUN http_proxy="${APTCACHER}" /helpers/setup-androidsdk.sh
+
+ENV ANDROID_HOME=/usr/lib/android-sdk
+ENV ANDROID_SDK_ROOT=/usr/lib/android-sdk
+ENV PATH="$PATH:/usr/lib/android-sdk/platform-tools"
 
 ################################################################################
 # install cleanup
