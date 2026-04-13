@@ -99,7 +99,7 @@ jobs:
               --build-arg INSTALL_DOTNETFRAMEWORK= \
               --build-arg INSTALL_POWERSHELL=yes \
               --build-arg INSTALL_MSYS2= \
-              --build-arg INSTALL_DOTNETEXTRAS=yes \
+              --build-arg INSTALL_DOTNETEXTRAS= \
               --build-arg INSTALL_VCRUN= \
               --build-arg INSTALL_PYTHON3=yes \
               --build-arg INSTALL_DOTNETDUMMYAPP=yes \
