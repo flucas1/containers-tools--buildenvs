@@ -26,7 +26,7 @@ jobs:
         run: rm -rf containers-tools
 
       - name: Checkout repository buildenvs
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: flucas1/containers-tools--buildenvs
           ref: main
@@ -34,7 +34,7 @@ jobs:
           clean: true
 
       - name: Checkout repository helpers
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: flucas1/containers-tools--helpers
           ref: main
