@@ -195,8 +195,8 @@ COPY --from=containers-tools ./dotnetcache/ /root/.cache/dotnetcache/
 
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetdependencies.sh
 RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetlocation.sh
-RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh "$( if [ "${VERSION_DOTNETCORE_PREVIEW}" = "" ] ; then echo preview ; else echo "${VERSION_DOTNETCORE_PREVIEW}" ; fi )"
-RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh newest
+RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh "$( if [ "${VERSION_DOTNETCORE_PREVIEW}" = "" ] ; then echo preview ; else echo "${VERSION_DOTNETCORE_PREVIEW}" ; fi )" /root/.cache/dotnetcache
+RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh newest /root/.cache/dotnetcache
 
 ENV PATH="$PATH:/opt/dotnet"
 # do not do ${PATH} -- this is envvar from computer, without {} it is from container
