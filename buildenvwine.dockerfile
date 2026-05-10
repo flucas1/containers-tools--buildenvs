@@ -213,10 +213,10 @@ RUN rm -R -f /home/wineuser/.cache/pythoncache/
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./pythoncache/ /home/wineuser/.cache/dotnetcache/
 
-RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" "$( if [ "${VERSION_DOTNETCORE_PREVIEW}" = "" ] ; then echo preview ; else echo "${VERSION_DOTNETCORE_PREVIEW}" ; fi )" ; fi
-RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" newest ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" "$( if [ "${VERSION_DOTNETCORE_PREVIEW}" = "" ] ; then echo preview ; else echo "${VERSION_DOTNETCORE_PREVIEW}" ; fi )" /home/wineuser/.cache/dotnetcache ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" newest /home/wineuser/.cache/dotnetcache ; fi
 
-RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh         "${DIRECTINSTALL}" /home/wineuser/.cache/dotnetcache ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh    "${DIRECTINSTALL}" /home/wineuser/.cache/dotnetcache ; fi
 
 RUN rm -R -f /home/wineuser/.cache/dotnetcache/
 
