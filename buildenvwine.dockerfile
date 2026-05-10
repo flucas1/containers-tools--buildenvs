@@ -202,20 +202,23 @@ RUN rm -R -f /home/wineuser/.cache/winetricks/powershell20/
 ################################################################################
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./pythoncache/ /home/wineuser/.cache/pythoncache/
-RUN if [ "${INSTALL_PYTHON3}"           = "yes" ] ; then /helpers/wine-python3.sh           "${DIRECTINSTALL}" /home/wineuser/.cache/pythoncache/ ; fi
+
+RUN if [ "${INSTALL_PYTHON3}"           = "yes" ] ; then /helpers/wine-python3.sh           "${DIRECTINSTALL}" /home/wineuser/.cache/pythoncache ; fi
+
 RUN rm -R -f /home/wineuser/.cache/pythoncache/
 
 ################################################################################
 # .NET CORE SDK
 ################################################################################
 
+COPY --from=containers-tools --chown=wineuser:wineuser ./pythoncache/ /home/wineuser/.cache/dotnetcache/
+
 RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" "$( if [ "${VERSION_DOTNETCORE_PREVIEW}" = "" ] ; then echo preview ; else echo "${VERSION_DOTNETCORE_PREVIEW}" ; fi )" ; fi
 RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" newest ; fi
-# RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" previous ; fi
-# RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetruntime.sh     "${DIRECTINSTALL}" ; fi
-# RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetasp.sh         "${DIRECTINSTALL}" ; fi
 
-RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh         "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh         "${DIRECTINSTALL}" /home/wineuser/.cache/dotnetcache ; fi
+
+RUN rm -R -f /home/wineuser/.cache/dotnetcache/
 
 ################################################################################
 # dotnet-extras
