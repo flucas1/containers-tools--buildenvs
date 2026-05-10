@@ -191,6 +191,8 @@ ENV NO_COLOR 1
 
 RUN [ "${DOTNET_CLI_TELEMETRY_OPTOUT}" = "1" ]
 
+COPY --from=containers-tools ./dotnetcache/ /root/.cache/dotnetcache/
+
 # RUN /helpers/wget-with-retries.sh https://packages.microsoft.com/keys/microsoft.asc /etc/apt/keyrings/netcore.asc
 # RUN printf "Types: deb\nURIs: https://packages.microsoft.com/debian/12/prod\nSuites: $(lsb_release -c | awk '{print $2}')\nComponents: main\nSigned-By: /etc/apt/keyrings/netcore.asc\n" > /etc/apt/sources.list.d/netcore.sources
 # RUN http_proxy="${APTCACHER}" /helpers/apt-update.sh
@@ -218,11 +220,13 @@ ENV PATH="$PATH:/opt/dotnet"
 
 RUN /helpers/setup-dotnetdebugger.sh
 
-RUN /helpers/setup-dotnetextras.sh
+RUN /helpers/setup-dotnetextras.sh /root/.cache/dotnetcache
 
 RUN python3 /helpers/dotnet-dummyapp.py
 
 RUN /helpers/setup-emscripten.sh
+
+RUN rm -R -f /root/.cache/dotnetcache/
 
 ################################################################################
 # Android Studio
