@@ -202,7 +202,7 @@ RUN rm -R -f /home/wineuser/.cache/winetricks/powershell20/
 ################################################################################
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./pythoncache/ /home/wineuser/.cache/pythoncache/
-RUN if [ "${INSTALL_PYTHON3}"           = "yes" ] ; then /helpers/wine-python3.sh           "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_PYTHON3}"           = "yes" ] ; then /helpers/wine-python3.sh           "${DIRECTINSTALL}" /home/wineuser/.cache/pythoncache/ ; fi
 RUN rm -R -f /home/wineuser/.cache/pythoncache/
 
 ################################################################################
