@@ -211,7 +211,7 @@ RUN rm -R -f /home/wineuser/.cache/pythoncache/
 # .NET CORE SDK
 ################################################################################
 
-COPY --from=containers-tools --chown=wineuser:wineuser ./pythoncache/ /home/wineuser/.cache/dotnetcache/
+COPY --from=containers-tools --chown=wineuser:wineuser ./dotnetcache/ /home/wineuser/.cache/dotnetcache/
 
 RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" "$( if [ "${VERSION_DOTNETCORE_PREVIEW}" = "" ] ; then echo preview ; else echo "${VERSION_DOTNETCORE_PREVIEW}" ; fi )" /home/wineuser/.cache/dotnetcache ; fi
 RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" newest /home/wineuser/.cache/dotnetcache ; fi
