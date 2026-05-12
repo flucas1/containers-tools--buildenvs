@@ -97,13 +97,13 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh libusb-1.0-0
 # install platformio
 ################################################################################
 
-RUN /helpers/setup-platformio.sh
+RUN http_proxy="${APTCACHER}" /helpers/setup-platformio.sh
 
 ################################################################################
 # install arduino
 ################################################################################
 
-RUN /helpers/setup-arduino.sh
+RUN http_proxy="${APTCACHER}" /helpers/setup-arduino.sh
 
 ################################################################################
 # install cleanup
