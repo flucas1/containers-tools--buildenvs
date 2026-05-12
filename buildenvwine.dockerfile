@@ -155,7 +155,7 @@ RUN /helpers/wine-boot.sh
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/vcrun2008/ ./.cache/winetricks/vcrun2008/
 COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/vcrun2019/ ./.cache/winetricks/vcrun2019/
-RUN if [ "${INSTALL_VCRUN}"             = "yes" ] ; then /helpers/wine-vcredist.sh          "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_VCRUN}"             = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-vcredist.sh          "${DIRECTINSTALL}" ; fi
 RUN rm -R -f ./.cache/winetricks/vcrun2008/
 RUN rm -R -f ./.cache/winetricks/vcrun2019/
 
@@ -164,7 +164,7 @@ RUN rm -R -f ./.cache/winetricks/vcrun2019/
 ################################################################################
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/vb6run/ ./.cache/winetricks/vb6run/
-RUN if [ "${INSTALL_VBRUN}"             = "yes" ] ; then /helpers/wine-vbredist.sh          "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_VBRUN}"             = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-vbredist.sh          "${DIRECTINSTALL}" ; fi
 RUN rm -R -f ./.cache/winetricks/vb6run/
 
 ################################################################################
@@ -178,7 +178,7 @@ COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/dotnet452/ /
 COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/dotnet462/ /home/wineuser/.cache/winetricks/dotnet462/
 COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/dotnet472/ /home/wineuser/.cache/winetricks/dotnet472/
 COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/dotnet48/ /home/wineuser/.cache/winetricks/dotnet48/
-RUN if [ "${INSTALL_DOTNETFRAMEWORK}"   = "yes" ] ; then /helpers/wine-dotnetframework.sh   "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_DOTNETFRAMEWORK}"   = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-dotnetframework.sh   "${DIRECTINSTALL}" ; fi
 RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet20sp2/
 RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet35sp1/
 RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet40/
@@ -193,7 +193,7 @@ RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet48/
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/powershell10/ /home/wineuser/.cache/winetricks/powershell10/
 COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/powershell20/ /home/wineuser/.cache/winetricks/powershell20/
-RUN if [ "${INSTALL_WINDOWSPOWERSHELL}" = "yes" ] ; then /helpers/wine-windowspowershell.sh "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_WINDOWSPOWERSHELL}" = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-windowspowershell.sh "${DIRECTINSTALL}" ; fi
 RUN rm -R -f /home/wineuser/.cache/winetricks/powershell10/
 RUN rm -R -f /home/wineuser/.cache/winetricks/powershell20/
 
@@ -203,7 +203,7 @@ RUN rm -R -f /home/wineuser/.cache/winetricks/powershell20/
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./pythoncache/ /home/wineuser/.cache/pythoncache/
 
-RUN if [ "${INSTALL_PYTHON3}"           = "yes" ] ; then /helpers/wine-python3.sh           "${DIRECTINSTALL}" /home/wineuser/.cache/pythoncache ; fi
+RUN if [ "${INSTALL_PYTHON3}"           = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-python3.sh           "${DIRECTINSTALL}" /home/wineuser/.cache/pythoncache ; fi
 
 RUN rm -R -f /home/wineuser/.cache/pythoncache/
 
@@ -213,10 +213,10 @@ RUN rm -R -f /home/wineuser/.cache/pythoncache/
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./pythoncache/ /home/wineuser/.cache/dotnetcache/
 
-RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" "$( if [ "${VERSION_DOTNETCORE_PREVIEW}" = "" ] ; then echo preview ; else echo "${VERSION_DOTNETCORE_PREVIEW}" ; fi )" /home/wineuser/.cache/dotnetcache ; fi
-RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" newest /home/wineuser/.cache/dotnetcache ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" "$( if [ "${VERSION_DOTNETCORE_PREVIEW}" = "" ] ; then echo preview ; else echo "${VERSION_DOTNETCORE_PREVIEW}" ; fi )" /home/wineuser/.cache/dotnetcache ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-dotnetsdk.sh         "${DIRECTINSTALL}" newest /home/wineuser/.cache/dotnetcache ; fi
 
-RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then /helpers/wine-dotnetdebugger.sh    "${DIRECTINSTALL}" /home/wineuser/.cache/dotnetcache ; fi
+RUN if [ "${INSTALL_DOTNETCORE}"        = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-dotnetdebugger.sh    "${DIRECTINSTALL}" /home/wineuser/.cache/dotnetcache ; fi
 
 RUN rm -R -f /home/wineuser/.cache/dotnetcache/
 
@@ -224,43 +224,43 @@ RUN rm -R -f /home/wineuser/.cache/dotnetcache/
 # dotnet-extras
 ################################################################################
 
-RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then /helpers/wine-dotnetextras.sh /dev/null ; fi
+RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-dotnetextras.sh /dev/null ; fi
 
 ################################################################################
 # dotnet-dummyapp
 ################################################################################
 
-RUN if [ "${INSTALL_DOTNETDUMMYAPP}"    = "yes" ] ; then /helpers/wine-dotnet-dummyapp.sh /dev/null ; fi
+RUN if [ "${INSTALL_DOTNETDUMMYAPP}"    = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-dotnet-dummyapp.sh /dev/null ; fi
 
 ################################################################################
 # wix
 ################################################################################
 
-RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then /helpers/wine-wix.sh /dev/null ; fi
+RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-wix.sh /dev/null ; fi
 
 ################################################################################
 # powershell 7.4
 ################################################################################
 
-RUN if [ "${INSTALL_POWERSHELL}"        = "yes" ] ; then /helpers/wine-powershell.sh        "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_POWERSHELL}"        = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-powershell.sh        "${DIRECTINSTALL}" ; fi
 
 ################################################################################
 # MS build tools
 ################################################################################
 
-RUN if [ "${INSTALL_MSBUILDTOOLS}"      = "yes" ] ; then /helpers/wine-msbuildtools.sh      "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_MSBUILDTOOLS}"      = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-msbuildtools.sh      "${DIRECTINSTALL}" ; fi
 
 ################################################################################
 # msys2
 ################################################################################
 
-RUN if [ "${INSTALL_MSYS2}"             = "yes" ] ; then /helpers/wine-msys2.sh             "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_MSYS2}"             = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-msys2.sh             "${DIRECTINSTALL}" ; fi
 
 ################################################################################
 # PIP packages
 ################################################################################
 
-RUN if [ "${INSTALL_PIP}"               = "yes" ] ; then /helpers/wine-pip.sh               "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_PIP}"               = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-pip.sh               "${DIRECTINSTALL}" ; fi
 
 ################################################################################
 # final checks

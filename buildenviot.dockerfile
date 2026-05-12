@@ -90,7 +90,7 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh dfu-util
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh libusb-1.0-0
 
 #RUN mkdir -p /esp
-#RUN git -C /esp clone --recursive https://github.com/espressif/esp-idf.git
+#RUN http_proxy="${APTCACHER}" git -C /esp clone --recursive https://github.com/espressif/esp-idf.git
 #RUN /esp/esp-idf/install.sh esp32
 
 ################################################################################

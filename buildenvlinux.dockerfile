@@ -170,7 +170,7 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh build-essential
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh yamllint
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh yq
 
-RUN /helpers/wget-with-retries.sh https://packages.buildkite.com/helm-linux/helm-debian/gpgkey /etc/apt/keyrings/helm.asc
+RUN http_proxy="${APTCACHER}" /helpers/wget-with-retries.sh https://packages.buildkite.com/helm-linux/helm-debian/gpgkey /etc/apt/keyrings/helm.asc
 RUN printf "Types: deb\nURIs: https://packages.buildkite.com/helm-linux/helm-debian/any/\nSuites: any\nComponents: main\nSigned-By: /etc/apt/keyrings/helm.asc\n" > /etc/apt/sources.list.d/helm.sources
 RUN http_proxy="${APTCACHER}" /helpers/apt-update.sh
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh helm
@@ -201,13 +201,13 @@ RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetsdk.sh newest /root/.cache/do
 ENV PATH="$PATH:/opt/dotnet"
 # do not do ${PATH} -- this is envvar from computer, without {} it is from container
 
-RUN /helpers/setup-dotnetdebugger.sh /root/.cache/dotnetcache
+RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetdebugger.sh /root/.cache/dotnetcache
 
-RUN /helpers/setup-dotnetextras.sh
+RUN http_proxy="${APTCACHER}" /helpers/setup-dotnetextras.sh
 
-RUN python3 /helpers/dotnet-dummyapp.py
+RUN http_proxy="${APTCACHER}" python3 /helpers/dotnet-dummyapp.py
 
-RUN /helpers/setup-emscripten.sh
+RUN http_proxy="${APTCACHER}" /helpers/setup-emscripten.sh
 
 RUN rm -R -f /root/.cache/dotnetcache/
 
