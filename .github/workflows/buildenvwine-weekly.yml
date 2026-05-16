@@ -77,6 +77,7 @@ jobs:
             mkdir -p /data/containers-tools/winetricks/powershell10 &&
             mkdir -p /data/containers-tools/winetricks/powershell20 &&
             mkdir -p /data/containers-tools/pythoncache &&
+            mkdir -p /data/containers-tools/dotnetcache &&
             df -h &&
             buildah bud \
               --storage-driver vfs --pull --layers=false --isolation=chroot --network=host --pid=host --security-opt label=disable \
