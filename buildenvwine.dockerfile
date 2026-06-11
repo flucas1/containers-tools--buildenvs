@@ -239,7 +239,7 @@ RUN if [ "${INSTALL_DOTNETDUMMYAPP}"    = "yes" ] ; then http_proxy="${APTCACHER
 RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-wix.sh /dev/null ; fi
 
 ################################################################################
-# powershell 7.4
+# powershell
 ################################################################################
 
 RUN if [ "${INSTALL_POWERSHELL}"        = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-powershell.sh        "${DIRECTINSTALL}" ; fi
