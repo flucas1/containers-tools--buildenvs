@@ -169,6 +169,18 @@ RUN if [ "${INSTALL_VBRUN}"             = "yes" ] ; then http_proxy="${APTCACHER
 RUN rm -R -f ./.cache/winetricks/vb6run/
 
 ################################################################################
+# python3 on wine
+################################################################################
+# installer seems OK without dotnet framework, fails with it
+################################################################################
+
+COPY --from=containers-tools --chown=wineuser:wineuser ./pythoncache/ /home/wineuser/.cache/pythoncache/
+
+RUN if [ "${INSTALL_PYTHON3}"           = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-python3.sh           "${DIRECTINSTALL}" /home/wineuser/.cache/pythoncache ; fi
+
+RUN rm -R -f /home/wineuser/.cache/pythoncache/
+
+################################################################################
 # dotnet framework
 ################################################################################
 
@@ -199,16 +211,6 @@ COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/powershell20
 RUN if [ "${INSTALL_WINDOWSPOWERSHELL}" = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-windowspowershell.sh "${DIRECTINSTALL}" ; fi
 RUN rm -R -f /home/wineuser/.cache/winetricks/powershell10/
 RUN rm -R -f /home/wineuser/.cache/winetricks/powershell20/
-
-################################################################################
-# python3 on wine
-################################################################################
-
-COPY --from=containers-tools --chown=wineuser:wineuser ./pythoncache/ /home/wineuser/.cache/pythoncache/
-
-RUN if [ "${INSTALL_PYTHON3}"           = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-python3.sh           "${DIRECTINSTALL}" /home/wineuser/.cache/pythoncache ; fi
-
-RUN rm -R -f /home/wineuser/.cache/pythoncache/
 
 ################################################################################
 # .NET CORE SDK
