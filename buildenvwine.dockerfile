@@ -171,8 +171,6 @@ RUN rm -R -f ./.cache/winetricks/vb6run/
 ################################################################################
 # python3 on wine
 ################################################################################
-# installer seems OK without dotnet framework, fails with it
-################################################################################
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./pythoncache/ /home/wineuser/.cache/pythoncache/
 
