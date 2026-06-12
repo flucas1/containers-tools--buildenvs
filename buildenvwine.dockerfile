@@ -178,7 +178,7 @@ COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/dotnet40/ /h
 COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/dotnet452/ /home/wineuser/.cache/winetricks/dotnet452/
 COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/dotnet462/ /home/wineuser/.cache/winetricks/dotnet462/
 COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/dotnet472/ /home/wineuser/.cache/winetricks/dotnet472/
-COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/dotnet48/ /home/wineuser/.cache/winetricks/dotnet48/
+COPY --from=containers-tools --chown=wineuser:wineuser ./winetricks/dotnet481/ /home/wineuser/.cache/winetricks/dotnet481/
 RUN if [ "${INSTALL_DOTNETFRAMEWORK}"   = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-dotnetframework.sh   "${DIRECTINSTALL}" ; fi
 RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet20sp2/
 RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet35sp1/
@@ -186,7 +186,7 @@ RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet40/
 RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet452/
 RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet462/
 RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet472/
-RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet48/
+RUN rm -R -f /home/wineuser/.cache/winetricks/dotnet481/
 
 ################################################################################
 # windows powershell
