@@ -124,7 +124,6 @@ COPY --from=containers-tools ./winecache/mono/ /usr/share/wine/mono/
 RUN http_proxy="${APTCACHER}" /helpers/setup-wine.sh "${WINEGRAPE}" "${WINEVERSION}" "${MULTIARCH}"
 
 RUN http_proxy="${APTCACHER}" /helpers/setup-verisign.sh
-RUN http_proxy="${APTCACHER}" /helpers/setup-digicert.sh
 
 ################################################################################
 # WINEPREFIX
