@@ -94,6 +94,7 @@ RUN sed -i -e 's|^driver = ""|driver = "overlay"|g' /etc/containers/storage.conf
 ################################################################################
 
 RUN http_proxy="${APTCACHER}" /helpers/setup-exif.sh
+RUN http_proxy="${APTCACHER}" /helpers/setup-cloc.sh
 
 ################################################################################
 # C
