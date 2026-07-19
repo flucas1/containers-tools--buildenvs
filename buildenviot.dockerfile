@@ -103,7 +103,7 @@ RUN http_proxy="${APTCACHER}" /helpers/setup-platformio.sh
 # install arduino
 ################################################################################
 
-RUN http_proxy="${APTCACHER}" /helpers/setup-arduino.sh
+RUN http_proxy="${APTCACHER}" /helpers/setup-arduino.sh /root/.cache/micronucleus
 
 ################################################################################
 # install cleanup
