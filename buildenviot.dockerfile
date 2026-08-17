@@ -56,6 +56,7 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh ssl-cert
 
 RUN http_proxy="${APTCACHER}" /helpers/setup-core.sh
 RUN http_proxy="${APTCACHER}" /helpers/setup-mc.sh
+RUN http_proxy="${APTCACHER}" /helpers/setup-git.sh
 
 ################################################################################
 # sysbench
@@ -76,7 +77,6 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh python3-venv
 
 #https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html
 
-RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh git
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh wget
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh flex
 RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh bison

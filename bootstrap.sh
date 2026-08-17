@@ -17,5 +17,3 @@ ls /dev/fuse || true
 buildah -v
 podman -v
 skopeo -v
-
-http_proxy=${APTCACHER} DEBIAN_FRONTEND=noninteractive apt-get install git --no-install-recommends -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold"
