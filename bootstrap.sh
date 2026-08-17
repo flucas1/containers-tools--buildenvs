@@ -4,7 +4,7 @@ set -e
 set -x
 
 http_proxy=${APTCACHER} DEBIAN_FRONTEND=noninteractive apt-get update
-http_proxy=${APTCACHER} DEBIAN_FRONTEND=noninteractive apt-get install tzdata ca-certificates jq sysbench git rsync --no-install-recommends -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold"
+http_proxy=${APTCACHER} DEBIAN_FRONTEND=noninteractive apt-get install tzdata ca-certificates jq sysbench git git-lfs rsync --no-install-recommends -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold"
 sysbench cpu run
 sysbench memory run
 
