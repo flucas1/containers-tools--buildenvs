@@ -56,6 +56,7 @@ RUN http_proxy="${APTCACHER}" /helpers/apt-retry-install.sh ssl-cert
 
 RUN http_proxy="${APTCACHER}" /helpers/setup-core.sh
 RUN http_proxy="${APTCACHER}" /helpers/setup-mc.sh
+RUN http_proxy="${APTCACHER}" /helpers/setup-git.sh
 
 RUN http_proxy="${APTCACHER}" /helpers/setup-fonts-base.sh
 RUN mkdir -p /root/mscorefonts
