@@ -17,3 +17,5 @@ ls /dev/fuse || true
 buildah -v
 podman -v
 skopeo -v
+
+podman system migrate
