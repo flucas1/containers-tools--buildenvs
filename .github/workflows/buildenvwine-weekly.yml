@@ -93,7 +93,7 @@ jobs:
               --build-arg CUSTOMREPOSITORY_PATH=/repository/ \
               --build-arg DIRECTINSTALL=yes \
               --build-arg INSTALL_MSCOREFONTS= \
-              --build-arg INSTALL_PIP= \
+              --build-arg INSTALL_PIP=yes \
               --build-arg INSTALL_MSBUILDTOOLS= \
               --build-arg INSTALL_VBRUN= \
               --build-arg INSTALL_DOTNETCORE=yes \
