@@ -30,6 +30,7 @@ RUN mkdir -p /helperscache
 COPY --from=containers-tools ./helperscache/ /helperscache
 RUN chmod -R a+r /helperscache
 RUN chmod a+w /helperscache
+RUN find /helperscache/ -type f -exec dos2unix {} +
 
 ################################################################################
 # apt basic config
