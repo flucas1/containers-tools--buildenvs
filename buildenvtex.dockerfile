@@ -25,7 +25,7 @@ RUN http_proxy="${APTCACHER}" sh -c "printf \"\$http_proxy\\n\""
 RUN mkdir -p /helpers
 COPY --from=containers-tools ./helpers/ /helpers
 RUN chmod a+x /helpers/*.sh
-RUN find /helpers/ -type f -exec sed -i 's/\r$//' {} +
+find /helpers/ -maxdepth 1 -type f -exec sed -i 's/\r$//' {} +
 
 RUN mkdir -p /helperscache
 COPY --from=containers-tools ./helperscache/ /helperscache
