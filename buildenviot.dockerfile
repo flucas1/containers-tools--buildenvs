@@ -25,12 +25,12 @@ RUN http_proxy="${APTCACHER}" sh -c "printf \"\$http_proxy\\n\""
 RUN mkdir -p /helpers
 COPY --from=containers-tools ./helpers/ /helpers
 RUN chmod a+x /helpers/*.sh
+RUN find /helpers/ -type f -exec sed -i 's/\r$//' {} +
 
 RUN mkdir -p /helperscache
 COPY --from=containers-tools ./helperscache/ /helperscache
 RUN chmod -R a+r /helperscache
 RUN chmod a+w /helperscache
-RUN find /helperscache/ -type f -exec sed -i 's/\r$//' {} +
 
 ################################################################################
 # apt basic config
