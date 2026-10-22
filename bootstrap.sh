@@ -18,4 +18,8 @@ buildah -v
 podman -v
 skopeo -v
 
-podman system migrate
+if podman unshare true 2>/dev/null; then
+  podman system migrate
+else
+  echo "Skipping podman system migrate: User namespaces are not permitted."
+fi
