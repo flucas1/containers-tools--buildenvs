@@ -74,6 +74,7 @@ jobs:
             mkdir -p /data/containers-tools/winetricks/dotnet462 &&
             mkdir -p /data/containers-tools/winetricks/dotnet472 &&
             mkdir -p /data/containers-tools/winetricks/dotnet48 &&
+            mkdir -p /data/containers-tools/winetricks/dotnet481 &&
             mkdir -p /data/containers-tools/winetricks/powershell10 &&
             mkdir -p /data/containers-tools/winetricks/powershell20 &&
             mkdir -p /data/containers-tools/pythoncache &&
