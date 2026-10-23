@@ -108,8 +108,8 @@ jobs:
               --build-arg INSTALL_PIP=yes \
               . &&
             df -h &&
-            echo "${DOCKER_TOKEN}" | buildah login --username "${DOCKER_USERNAME}" --password-stdin docker.io &&
-            buildah tag buildenvwine:latest docker.io/vaspian/buildenvwine:latest &&
-            buildah push docker.io/vaspian/buildenvwine:latest
+            echo "${DOCKER_TOKEN}" | buildah --storage-driver vfs login --username "${DOCKER_USERNAME}" --password-stdin docker.io &&
+            buildah --storage-driver vfs tag buildenvwine:latest docker.io/vaspian/buildenvwine:latest &&
+            buildah --storage-driver vfs push docker.io/vaspian/buildenvwine:latest
           " && \
           df -h
