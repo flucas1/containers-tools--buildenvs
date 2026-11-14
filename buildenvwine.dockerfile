@@ -140,6 +140,9 @@ RUN http_proxy="${APTCACHER}" /helpers/setup-windows-update-roots.sh
 ################################################################################
 
 RUN adduser wineuser --quiet --disabled-login --home /home/wineuser --gecos ,,,
+RUN mkdir -p "/run/user/$(id -u wineuser)"
+RUN chmod 700 "/run/user/$(id -u wineuser)"
+
 RUN mkdir -p /wineprefix
 RUN chown -R wineuser:wineuser /wineprefix
 WORKDIR /home/wineuser
