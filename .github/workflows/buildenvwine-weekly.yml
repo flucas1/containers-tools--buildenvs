@@ -103,6 +103,7 @@ jobs:
               --build-arg INSTALL_WINDOWSPOWERSHELL= \
               --build-arg INSTALL_MSIXCORE=yes \
               --build-arg INSTALL_POWERSHELL=yes \
+              --build-arg INSTALL_WINGET=yes \
               --build-arg INSTALL_MSBUILDTOOLS=yes \
               --build-arg INSTALL_MSYS2= \
               --build-arg INSTALL_PYTHON3=yes \
