@@ -291,6 +291,12 @@ RUN if [ "${INSTALL_MSYS2}"             = "yes" ] ; then http_proxy="${APTCACHER
 RUN if [ "${INSTALL_PIP}"               = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-pip.sh               "${DIRECTINSTALL}" ; fi
 
 ################################################################################
+# rust
+################################################################################
+
+RUN if [ "${INSTALL_RUST}"              = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-rust.sh              "${DIRECTINSTALL}" ; fi
+
+################################################################################
 # final checks
 ################################################################################
 
