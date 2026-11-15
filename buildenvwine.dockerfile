@@ -260,7 +260,7 @@ RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then http_proxy="${APTCACHER
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./msixcache/ /home/wineuser/.cache/msixcache/
 
-RUN if [ "${INSTALL_MSIXCORE}"          = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-msixcore.sh          "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_MSIXCORE}"          = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-msixcore.sh          "${DIRECTINSTALL}"  /home/wineuser/.cache/msixcache ; fi
 
 RUN rm -R -f /home/wineuser/.cache/msixcache/
 
@@ -270,7 +270,7 @@ RUN rm -R -f /home/wineuser/.cache/msixcache/
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./powershellcache/ /home/wineuser/.cache/powershellcache/
 
-RUN if [ "${INSTALL_POWERSHELL}"        = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-powershell.sh        "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_POWERSHELL}"        = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-powershell.sh        "${DIRECTINSTALL}"  /home/wineuser/.cache/powershellcache ; fi
 
 RUN rm -R -f /home/wineuser/.cache/powershellcache/
 
@@ -280,7 +280,7 @@ RUN rm -R -f /home/wineuser/.cache/powershellcache/
 
 COPY --from=containers-tools --chown=wineuser:wineuser ./wingetcache/ /home/wineuser/.cache/wingetcache/
 
-RUN if [ "${INSTALL_WINGET}"            = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-winget.sh            "${DIRECTINSTALL}" ; fi
+RUN if [ "${INSTALL_WINGET}"            = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-winget.sh            "${DIRECTINSTALL}"  /home/wineuser/.cache/wingetcache ; fi
 
 RUN rm -R -f /home/wineuser/.cache/wingetcache/
 
