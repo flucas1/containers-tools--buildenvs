@@ -21,6 +21,7 @@ ARG INSTALL_DOTNETCORE
 ARG INSTALL_DOTNETDUMMYAPP
 ARG INSTALL_DOTNETEXTRAS
 ARG INSTALL_WINDOWSPOWERSHELL
+ARG INSTALL_MSIXCORE
 ARG INSTALL_POWERSHELL
 ARG INSTALL_MSBUILDTOOLS
 ARG INSTALL_MSYS2
@@ -252,6 +253,12 @@ RUN if [ "${INSTALL_DOTNETDUMMYAPP}"    = "yes" ] ; then http_proxy="${APTCACHER
 ################################################################################
 
 RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-wix.sh /dev/null ; fi
+
+################################################################################
+# msix core
+################################################################################
+
+RUN if [ "${INSTALL_MSIXCORE}"          = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-msixcore.sh          "${DIRECTINSTALL}" ; fi
 
 ################################################################################
 # powershell
