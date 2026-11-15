@@ -108,6 +108,7 @@ jobs:
               --build-arg INSTALL_MSYS2= \
               --build-arg INSTALL_PYTHON3=yes \
               --build-arg INSTALL_PIP=yes \
+              --build-arg INSTALL_RUST=yes \
               . &&
             df -h &&
             echo "${DOCKER_TOKEN}" | buildah --storage-driver vfs login --username "${DOCKER_USERNAME}" --password-stdin docker.io &&
