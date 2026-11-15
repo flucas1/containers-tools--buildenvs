@@ -267,6 +267,12 @@ RUN if [ "${INSTALL_MSIXCORE}"          = "yes" ] ; then http_proxy="${APTCACHER
 RUN if [ "${INSTALL_POWERSHELL}"        = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-powershell.sh        "${DIRECTINSTALL}" ; fi
 
 ################################################################################
+# winget
+################################################################################
+
+RUN if [ "${INSTALL_WINGET}"            = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-winget.sh            "${DIRECTINSTALL}" ; fi
+
+################################################################################
 # MS build tools
 ################################################################################
 
