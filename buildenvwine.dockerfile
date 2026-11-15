@@ -258,19 +258,31 @@ RUN if [ "${INSTALL_DOTNETEXTRAS}"      = "yes" ] ; then http_proxy="${APTCACHER
 # msix core
 ################################################################################
 
+COPY --from=containers-tools --chown=wineuser:wineuser ./msixcache/ /home/wineuser/.cache/msixcache/
+
 RUN if [ "${INSTALL_MSIXCORE}"          = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-msixcore.sh          "${DIRECTINSTALL}" ; fi
+
+RUN rm -R -f /home/wineuser/.cache/msixcache/
 
 ################################################################################
 # powershell
 ################################################################################
 
+COPY --from=containers-tools --chown=wineuser:wineuser ./powershellcache/ /home/wineuser/.cache/powershellcache/
+
 RUN if [ "${INSTALL_POWERSHELL}"        = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-powershell.sh        "${DIRECTINSTALL}" ; fi
+
+RUN rm -R -f /home/wineuser/.cache/powershellcache/
 
 ################################################################################
 # winget
 ################################################################################
 
+COPY --from=containers-tools --chown=wineuser:wineuser ./wingetcache/ /home/wineuser/.cache/wingetcache/
+
 RUN if [ "${INSTALL_WINGET}"            = "yes" ] ; then http_proxy="${APTCACHER}" /helpers/wine-winget.sh            "${DIRECTINSTALL}" ; fi
+
+RUN rm -R -f /home/wineuser/.cache/wingetcache/
 
 ################################################################################
 # MS build tools
